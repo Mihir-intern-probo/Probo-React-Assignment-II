@@ -3,6 +3,8 @@ import Add from "./add.png";
 import Remove from "./minus.png";
 import { ItemState } from "../Context/ItemsProvider";
 import { useNavigate } from "react-router";
+import "./normal.css";
+
 const CartItem = ({ item }) => {
   const { items, setItems, setTotalCost } = ItemState();
   const navigate = useNavigate();
@@ -57,7 +59,6 @@ const CartItem = ({ item }) => {
             newItems.push(tempItems[i])
         }
     }
-    console.log(newItems)
     setItems(newItems);
     getTotalCost();
   };
@@ -70,19 +71,21 @@ const CartItem = ({ item }) => {
           break;
         }
       }
-    console.log("Working")
   }, [items,navigate]);
 
   return (
-    <div style={{ border: "1px solid black", display: "flex" }}>
-      <div>
-        <img src={item.img} />
-      </div>
+    <div style={{border:"2px solid black",margin:"10px", borderRadius:"10px",backgroundColor:"#e69e7a",width:"auto",padding:"20px"}}>
+      <div style={{display:"flex"}}>
+      <div><img src={item.img} style={{borderRadius:"10px",border:"3px solid black"}}/></div>
       <div style={{ display: "block",marginLeft:"50px"}}>
-        <h1>{item.itemName}</h1>Number of Items : {item.qty}<br/>total price: {item.qty}x{item.price}{" "}
-        = {item.qty * item.price}<br/>
-        <div><img src={Add} height="20px" width="20px" onClick={addItem} />
-        <img src={Remove} height="20px" width="20px" onClick={removeItem} /></div>
+        <text style={{display:"block",textAlign: "center",fontSize:"30px",fontFamily: "inherit",fontWeight: "500"}}>{item.itemName}</text>
+        <text style={{display:"block",fontSize:"20px",fontFamily: "inherit",fontWeight: "500" }}>total price: {item.qty}x{item.price}= {item.qty * item.price}</text>
+        <div>
+          <button className="button-20" onClick={addItem}>+</button>
+          <text style={{fontSize:"30px",fontFamily: "inherit",fontWeight: "500",marginLeft:"10px", marginRight:"10px"}}>{item.qty}</text>
+          <button className="button-24" onClick={removeItem}>-</button>
+        </div>
+      </div>
       </div>
     </div>
   );
